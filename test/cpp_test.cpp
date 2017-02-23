@@ -1,5 +1,5 @@
-#include <cglog.h>
-#include<cstring>
+#include <libcglog.h>
+#include <cstring>
 #include <string>
 using namespace std;
 
