@@ -1,4 +1,4 @@
-INSTALL_DIR = /usr/local/
+INSTALL_DIR = /usr/
 
 all:
 	go build -buildmode=c-shared -o libcglog.so cglog.go
