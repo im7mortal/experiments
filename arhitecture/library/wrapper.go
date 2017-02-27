@@ -3,7 +3,7 @@ package library
 //#include <stdlib.h>
 //#cgo CPPFLAGS: -std=c++11
 //#cgo CFLAGS: -w
-//#cgo LDFLAGS: -lpthread -lmutex -lchrono
+//#cgo LDFLAGS: -lpthread
 //#include "c_wrapper.h"
 import "C"
 
