@@ -8,6 +8,7 @@
 #include <chrono>
 #include <thread>
 #include <future>
+#include <functional>
 
 class Calculator
 {
@@ -43,10 +44,11 @@ public:
     void init(void)
     {
     }
-   /* void inside(std::future<bool> fut)
+   void inside(std::future<bool>& fut)
     {
+    fut.get();
         std::cout << "inside" << std::endl;
-    }*/
+    }
     static Calculator *instance()
     {
         if (!s_instance)
@@ -73,9 +75,9 @@ void set(int i)
     std::future<bool> fut = std::async (is_prime,313222313);
         std::cout << i << std::endl;
     Calculator::instance()->set_value(0);
-//    Calculator::instance()->inside(fut);
+    Calculator::instance()->inside(std::ref(fut));
         std::cout << "Wait async" << std::endl;
-    fut.get();
+
     return ;
 }
 
