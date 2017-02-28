@@ -7,6 +7,7 @@
 #include <condition_variable>
 #include <chrono>
 #include <thread>
+#include <future>
 
 class Calculator
 {
@@ -24,10 +25,6 @@ class Calculator
 
     }
 public:
-    bool actual(string id) {
-        return true
-    }
-
     int get_value()
     {
         _mutex.lock();
@@ -46,6 +43,10 @@ public:
     void init(void)
     {
     }
+   /* void inside(std::future<bool> fut)
+    {
+        std::cout << "inside" << std::endl;
+    }*/
     static Calculator *instance()
     {
         if (!s_instance)
@@ -59,13 +60,22 @@ public:
 // allocated - not the object inself.
 Calculator *Calculator::s_instance = 0;
 
+bool is_prime (int x) {
+  std::cout << "Calculating. Please, wait...\n";
+        std::this_thread::sleep_for (std::chrono::seconds(5));
+  for (int i=2; i<x; ++i) if (x%i==0) return false;
+  return true;
+}
 
 extern "C" void set(int i);
 void set(int i)
 {
-
+    std::future<bool> fut = std::async (is_prime,313222313);
         std::cout << i << std::endl;
     Calculator::instance()->set_value(0);
+//    Calculator::instance()->inside(fut);
+        std::cout << "Wait async" << std::endl;
+    fut.get();
     return ;
 }
 
