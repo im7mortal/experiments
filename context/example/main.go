@@ -4,7 +4,7 @@ import "github.com/sturfeeinc/cglog/context"
 
 func main() {
 
-	library.GetContext()
-
+	ctx := library.GetContext()
+	library.StartCalc(ctx)
 
 }

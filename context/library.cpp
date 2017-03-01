@@ -130,8 +130,12 @@ int get(void)
     Calculator::instance()->set_value(0);
 }
 
-extern "C" int init(void);
-int init(void) {
+extern "C" int init(int * i);
+int init(int * i){
+    context * ctx = reinterpret_cast<context *>(i);
+    std::future<response> fut = ctx->pr.get_future();
+    Calculator::instance()->inside(std::ref(fut));
+
     return 0;
 }
 

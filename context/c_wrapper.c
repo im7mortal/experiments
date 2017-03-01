@@ -1,10 +1,10 @@
-int init(void);
+int init(int * i);
 int * get_context(void);
 void set(int i);
 
-int initC(void)
+int initC(int * i)
 {
-    return init();
+    return init(i);
 }
 
 void setC(int i)

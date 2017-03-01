@@ -13,8 +13,9 @@ import (
 
 type Context * C.int
 
-func StartCalc() int {
-	return int(C.initC())
+func StartCalc(ctx Context) int {
+
+	return int(C.initC(ctx))
 }
 
 func GetContext() Context {
