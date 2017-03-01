@@ -19,8 +19,8 @@ func Get(a float32) {
 	C.setC(C.int(a))
 }
 
-func Sent() {
-	lol := []C.int{1, 56, 99}
+func Sent(a float32) {
+	lol := []C.int{C.int(int(a)), 56, 99}
 	l := ([]C.int)(lol)
-	C.sentC((*C.int)(unsafe.Pointer(&l[0])), C.int(len(lol)), C.int(unsafe.Sizeof(int8(0))))
+	C.sentC((*C.int)(unsafe.Pointer(&l[0])), C.int(len(lol)), C.int(a))
 }

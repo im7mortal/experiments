@@ -62,7 +62,7 @@ public:
         std::cout << "Response" << std::endl;
         std::cout << res.data[0] << std::endl;
         std::cout << "Response" << std::endl;
-        global_queue[12] = res;
+        global_queue[res.length] = res;
     }
     response inst1(int query)
     {
@@ -105,11 +105,10 @@ response is_prime2 (int x) {
 extern "C" void set(int i);
 void set(int i)
 {
-    std::future<response> fut = std::async (is_prime2,12);
+    std::future<response> fut = std::async (is_prime2,i);
         std::cout << i << std::endl;
     Calculator::instance()->set_value(0);
     Calculator::instance()->inside(std::ref(fut));
-        std::cout << "Wait async" << std::endl;
 
     return ;
 }
@@ -127,9 +126,10 @@ int init(void) {
 
 extern "C" void sent(int i[], int j, int k);
 void sent(int i[], int j, int k) {
+        std::cout << "SENT!" << std::endl;
         int lol[3];
         response res;
-        res.length = j;
+        res.length = k;
 
         res.data[0] =  i[0];
         res.data[1] =  i[1];
