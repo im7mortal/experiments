@@ -9,11 +9,19 @@
 #include <thread>
 #include <future>
 #include <functional>
+#include <map>
+
+struct response {
+  int length;
+  int data[3];
+};
 
 class Calculator
 {
     std::mutex _mutex;
     std::condition_variable cv;
+    std::map<int,response> global_queue;
+
     static Calculator *s_instance;
 
     bool finished;
@@ -48,6 +56,12 @@ public:
     {
     fut.get();
         std::cout << "inside" << std::endl;
+    }
+   void inst(response res)
+    {
+        std::cout << "Response" << std::endl;
+        std::cout << res.data[0] << std::endl;
+        std::cout << "Response" << std::endl;
     }
     static Calculator *instance()
     {
@@ -92,11 +106,6 @@ int init(void) {
     return 0;
 }
 
-struct response {
-  int length;
-  int data[3];
-};
-
 extern "C" void sent(int i[], int j, int k);
 void sent(int i[], int j, int k) {
         int lol[3];
@@ -107,10 +116,6 @@ void sent(int i[], int j, int k) {
         res.data[1] =  i[1];
         res.data[2] =  i[2];
 
-        std::cout << "GOOO" << std::endl;
-        std::cout << j << std::endl;
-        std::cout << res.data[0] << std::endl;
-        std::cout << res.data[1] << std::endl;
-        std::cout << res.data[2] << std::endl;
+        Calculator::instance()->inst(res);
     return ;
 }
