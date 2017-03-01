@@ -2,6 +2,8 @@ package main
 
 import "github.com/sturfeeinc/cglog/context"
 
+const PARAMETERS  = 6
+
 func main() {
 	println("get context")
 	ctx := library.GetContext()
@@ -12,5 +14,11 @@ func main() {
 	}()
 
 	println("start calculation")
-	library.StartCalc(ctx)
+
+	data := []float32{
+		37.7922668457, 122.393577576, 3.3707399368, 15.1165, 94.8269, 0.0,
+		37.7945899963, 122.393371582, 2.9586400986, 143.546, 103.36, 0.0,
+	}
+
+	library.StartCalc(ctx, data, len(data) / PARAMETERS)
 }

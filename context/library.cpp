@@ -134,10 +134,13 @@ int get(void)
     Calculator::instance()->set_value(0);
 }
 
-extern "C" int init(int * i);
-int init(int * i){
-    context * ctx = reinterpret_cast<context *>(i);
-    std::future<response> fut = ctx->pr.get_future();
+extern "C" int start_calculation(int * ctx, float * data, int n);
+int start_calculation(int * ctx, float * data, int n){
+    context * ctx_ = reinterpret_cast<context *>(ctx);
+        std::cout << data[0] << std::endl;
+        std::cout << data[6] << std::endl;
+
+    std::future<response> fut = ctx_->pr.get_future();
      std::cout << "Inject future object in calculation" << std::endl;
     Calculator::instance()->inside(std::ref(fut));
 

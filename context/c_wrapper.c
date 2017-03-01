@@ -1,11 +1,11 @@
-int init(int * i);
+int start_calculation(int * ctx, float * data, int n);
 int * get_context(void);
 void set(int i);
 void sent(int * ctx, int i[], int j, int k);
 
-int initC(int * i)
+int start_calculation_c(int * ctx, float * data, int n)
 {
-    return init(i);
+    return start_calculation(ctx, data, n);
 }
 
 void setC(int i)

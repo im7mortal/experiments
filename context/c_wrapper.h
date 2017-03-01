@@ -2,7 +2,7 @@
 #define PROJECT_HEADER_H
 
 void sentC(int * ctx, int i[], int j, int k);
-int initC(int * i);
+int start_calculation_c(int * ctx, float * data, int n);
 void setC(int i);
 int * GetContextC(void);
 #endif //PROJECT_HEADER_H
