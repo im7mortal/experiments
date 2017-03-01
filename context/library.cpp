@@ -134,8 +134,8 @@ int get(void)
     Calculator::instance()->set_value(0);
 }
 
-extern "C" int start_calculation(int * ctx, float * data, int n);
-int start_calculation(int * ctx, float * data, int n){
+extern "C" int start_calculation(int * ctx, float * data, int n, int fov, int w, int h);
+int start_calculation(int * ctx, float * data, int n, int fov, int w, int h){
     context * ctx_ = reinterpret_cast<context *>(ctx);
         std::cout << data[0] << std::endl;
         std::cout << data[6] << std::endl;

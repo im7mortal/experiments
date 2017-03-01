@@ -20,5 +20,5 @@ func main() {
 		37.7945899963, 122.393371582, 2.9586400986, 143.546, 103.36, 0.0,
 	}
 
-	library.StartCalc(ctx, data, len(data) / PARAMETERS)
+	library.StartCalc(ctx, data, len(data) / PARAMETERS, 70, 1920, 1080)
 }

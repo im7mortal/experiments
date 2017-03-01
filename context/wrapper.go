@@ -13,11 +13,14 @@ import (
 
 type Context * C.int
 
-func StartCalc(ctx Context, data []float32, n int) int {
+func StartCalc(ctx Context, data []float32, n, fov, w, h int) int {
 	return int(C.start_calculation_c(
 		ctx,
 		(*C.float)(unsafe.Pointer(&data[0])),
 		C.int(n),
+		C.int(fov),
+		C.int(w),
+		C.int(h),
 	))
 }
 
