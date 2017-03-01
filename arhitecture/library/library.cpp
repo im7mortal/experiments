@@ -91,3 +91,14 @@ extern "C" int init(void);
 int init(void) {
     return 0;
 }
+
+extern "C" void sent(int i[], int j, int k);
+void sent(int i[], int j, int k) {
+
+        std::cout << "GOOO" << std::endl;
+        std::cout << j << std::endl;
+        std::cout << i[0] << std::endl;
+        std::cout << i[1] << std::endl;
+        std::cout << i[2] << std::endl;
+    return ;
+}
