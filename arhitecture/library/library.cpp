@@ -52,10 +52,10 @@ public:
     void init(void)
     {
     }
-   void inside(std::future<bool>& fut)
+   void inside(std::future<response>& fut)
     {
-    fut.get();
-        std::cout << "inside" << std::endl;
+        response res = fut.get();
+        std::cout << res.data[0] << std::endl;
     }
    void inst(response res)
     {
@@ -70,6 +70,7 @@ public:
         while (found){
              if ( global_queue.find(query) == global_queue.end() ) {
               // not found
+               std::this_thread::sleep_for (std::chrono::seconds(5));
             } else {
              return global_queue[query];
 
@@ -98,13 +99,13 @@ bool is_prime (int x) {
   return true;
 }
 response is_prime2 (int x) {
-    return Calculator::instance()->inst1(12);
+    return Calculator::instance()->inst1(x);
 }
 
 extern "C" void set(int i);
 void set(int i)
 {
-    std::future<bool> fut = std::async (is_prime,313222313);
+    std::future<response> fut = std::async (is_prime2,12);
         std::cout << i << std::endl;
     Calculator::instance()->set_value(0);
     Calculator::instance()->inside(std::ref(fut));
