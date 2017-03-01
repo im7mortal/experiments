@@ -92,13 +92,25 @@ int init(void) {
     return 0;
 }
 
+struct response {
+  int length;
+  int data[3];
+};
+
 extern "C" void sent(int i[], int j, int k);
 void sent(int i[], int j, int k) {
+        int lol[3];
+        response res;
+        res.length = j;
+
+        res.data[0] =  i[0];
+        res.data[1] =  i[1];
+        res.data[2] =  i[2];
 
         std::cout << "GOOO" << std::endl;
         std::cout << j << std::endl;
-        std::cout << i[0] << std::endl;
-        std::cout << i[1] << std::endl;
-        std::cout << i[2] << std::endl;
+        std::cout << res.data[0] << std::endl;
+        std::cout << res.data[1] << std::endl;
+        std::cout << res.data[2] << std::endl;
     return ;
 }
