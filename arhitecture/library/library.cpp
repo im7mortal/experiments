@@ -62,7 +62,22 @@ public:
         std::cout << "Response" << std::endl;
         std::cout << res.data[0] << std::endl;
         std::cout << "Response" << std::endl;
+        global_queue[12] = res;
     }
+    response inst1(int query)
+    {
+        bool found = true;
+        while (found){
+             if ( global_queue.find(query) == global_queue.end() ) {
+              // not found
+            } else {
+             return global_queue[query];
+
+            }
+        }
+
+    }
+
     static Calculator *instance()
     {
         if (!s_instance)
@@ -81,6 +96,9 @@ bool is_prime (int x) {
         std::this_thread::sleep_for (std::chrono::seconds(5));
   for (int i=2; i<x; ++i) if (x%i==0) return false;
   return true;
+}
+response is_prime2 (int x) {
+    return Calculator::instance()->inst1(12);
 }
 
 extern "C" void set(int i);
