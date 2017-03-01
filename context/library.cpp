@@ -65,7 +65,11 @@ public:
     }
    void inside(std::future<response>& fut)
     {
+
+     std::cout << "Waiting for delayed data" << std::endl;
         response res = fut.get();
+
+     std::cout << "Delayed data is ready" << std::endl;
         std::cout << res.data[0] << std::endl;
     }
    void inst(response res)
@@ -134,13 +138,16 @@ extern "C" int init(int * i);
 int init(int * i){
     context * ctx = reinterpret_cast<context *>(i);
     std::future<response> fut = ctx->pr.get_future();
+     std::cout << "Inject future object in calculation" << std::endl;
     Calculator::instance()->inside(std::ref(fut));
 
     return 0;
 }
 
-extern "C" void sent(int i[], int j, int k);
-void sent(int i[], int j, int k) {
+extern "C" void sent(int * ctx, int i[], int j, int k);
+void sent(int * ctx, int i[], int j, int k) {
+
+     std::cout << "Get data from go" << std::endl;
         std::cout << "SENT!" << std::endl;
         int lol[3];
         response res;
@@ -150,7 +157,8 @@ void sent(int i[], int j, int k) {
         res.data[1] =  i[1];
         res.data[2] =  i[2];
 
-        Calculator::instance()->inst(res);
+    context * ctx_ = reinterpret_cast<context *>(ctx);
+    ctx_->pr.set_value (res);
     return ;
 }
 

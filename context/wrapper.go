@@ -22,8 +22,9 @@ func GetContext() Context {
 	return C.GetContextC()
 }
 
-func SentDeffer(a float32) {
+func SentDeffer(ctx Context, a float32) {
 	lol := []C.int{C.int(int(a)), 56, 99}
 	l := ([]C.int)(lol)
-	C.sentC((*C.int)(unsafe.Pointer(&l[0])), C.int(len(lol)), C.int(a))
+	println("SEND GO DATA")
+	C.sentC(ctx, (*C.int)(unsafe.Pointer(&l[0])), C.int(len(lol)), C.int(a))
 }
